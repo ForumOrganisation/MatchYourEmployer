@@ -1,6 +1,6 @@
 import unittest
-from source.Algo import MatchMaker, DistanceEvaluator
-from source.Model import Student, Company, MatchingParameters
+from source.algo import MatchMaker, DistanceEvaluator
+from source.model import Student, Company, MatchingParameters
 
 
 class SimpleTest(unittest.TestCase):
@@ -11,10 +11,10 @@ class SimpleTest(unittest.TestCase):
         company = [Company() for _ in range(number_company)]
         main_computer = MatchMaker(students, company)
 
-        parameters = MatchingParameters(1.0, DistanceEvaluator, 2, 2)
+        parameters = MatchingParameters(0.0, DistanceEvaluator, 2, 2)
 
         matching = main_computer.compute_matching(parameters)
-        print(matching)
+        print("\n".join(map(str, matching.links)))
 
 
 if __name__ == '__main__':

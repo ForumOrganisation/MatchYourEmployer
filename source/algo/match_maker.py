@@ -1,8 +1,11 @@
 from collections import defaultdict
-from source.Model import Matching, Link
+from source.model import Matching, Link
+from source.utils import log
 
 
 class MatchMaker:
+    # algorithm constants
+
     SOURCE_NODE = 'source'
     SINK_NODE = 'sink'
 
@@ -10,17 +13,12 @@ class MatchMaker:
         self.students = students
         self.companies = companies
 
-        # algorithm constants
-
     def compute_matching(self, matching_parameters):
+        log('info', 'starting matching...')
         # generate graph
-
-        # list of nodes
-        # add source & sink
-        # add all students id, all companies id
-
-        # create graph as defaultdict of dict
-        graph_matching = defaultdict(dict)
+        log('info', 'creating the matching graph...')
+        # create graph as defaultdict of defaultdict
+        graph_matching = defaultdict(lambda: defaultdict(int))
 
         # initiate source & sink nodes according to parameters
         # those nodes are refered by strings, the others are refered by their id
@@ -41,18 +39,21 @@ class MatchMaker:
                     all_links.add(Link(student, company, score_association))
                     graph_matching[student.id_student][company.id_company] = 1
         # run ford fulkerson algorithm, the graph is modified
+        log('info', 'running the matching algorithm...')
         number_association = self.ford_fulkerson(
             graph_matching, self.SOURCE_NODE, self.SINK_NODE)
 
         # extract the matching as an object and return it
         # extract all the links : they are the backward edges activated in the residual graph
+        log('info', 'extracting the links...')
         selected_links = set()
         for link in all_links:
             if graph_matching[link.company.id_company][link.student.id_student] == 1:
                 selected_links.add(link)
-
         final_matching = Matching(
             self.students, self.companies, matching_parameters, selected_links)
+        log('info', 'matching computation done ! ')
+        return final_matching
 
     # Algorithm found on https://www.geeksforgeeks.org/ford-fulkerson-algorithm-for-maximum-flow-problem/ and modified
     '''Returns true if there is a path from source 's' to sink 't' in
@@ -106,7 +107,7 @@ class MatchMaker:
             path_flow = float("Inf")
             s = sink
             while(s != source):
-                path_flow = min(path_flow, self.graph[parent[s]][s])
+                path_flow = min(path_flow, graph[parent[s]][s])
                 s = parent[s]
 
             # Add path flow to overall flow
@@ -117,8 +118,8 @@ class MatchMaker:
             v = sink
             while(v != source):
                 u = parent[v]
-                self.graph[u][v] -= path_flow
-                self.graph[v][u] += path_flow
+                graph[u][v] -= path_flow
+                graph[v][u] += path_flow
                 v = parent[v]
 
         return max_flow
