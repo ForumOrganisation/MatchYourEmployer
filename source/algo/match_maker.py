@@ -13,19 +13,28 @@ class MatchMaker:
         self.students = students
         self.companies = companies
 
-    def compute_matching(self, matching_parameters):
+    def compute_matching(self, matching_parameters, previous_matching=None):
         log('info', 'starting matching...')
         # generate graph
         log('info', 'creating the matching graph...')
         # create graph as defaultdict of defaultdict
         graph_matching = defaultdict(lambda: defaultdict(int))
 
-        # initiate source & sink nodes according to parameters
+        # extract info from previous_matching
+        existent_links = defaultdict(set)
+        if previous_matching != None:
+            existent_links = previous_matching.get_map_links()
+        # initiate source & sink nodes according to parameters and existent nodes
+
         # those nodes are refered by strings, the others are refered by their id
         for id_student in [student.id_student for student in self.students]:
-            graph_matching[self.SOURCE_NODE][id_student] = matching_parameters.nb_company_by_student
+            number_links_left = max(
+                0, matching_parameters.nb_company_by_student - len(existent_links[id_student]))
+            graph_matching[self.SOURCE_NODE][id_student] = number_links_left
 
         for id_company in [company.id_company for company in self.companies]:
+            number_links_left = max(
+                0, matching_parameters.nb_student_by_company - len(existent_links[id_company]))
             graph_matching[id_company][self.SINK_NODE] = matching_parameters.nb_student_by_company
 
         # for every pair of student - company, add a link between them if their association is stronger than the treshold
@@ -35,7 +44,9 @@ class MatchMaker:
             for company in self.companies:
                 score_association = matching_parameters.distance_evaluator.evaluate(
                     student, company)
-                if score_association > matching_parameters.treshold:
+                # discard it if it doesnt satisfy the treshold or already used
+                if score_association > matching_parameters.treshold \
+                        and company.id_company not in existent_links[student.id_student]:
                     all_links.add(Link(student, company, score_association))
                     graph_matching[student.id_student][company.id_company] = 1
         # run ford fulkerson algorithm, the graph is modified

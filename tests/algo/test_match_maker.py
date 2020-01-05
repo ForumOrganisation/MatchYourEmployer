@@ -14,7 +14,11 @@ class SimpleTest(unittest.TestCase):
         parameters = MatchingParameters(0.0, DistanceEvaluator, 2, 2)
 
         matching = main_computer.compute_matching(parameters)
-        print("\n".join(map(str, matching.links)))
+        parameters.nb_student_by_company = 3
+        parameters.nb_company_by_student = 3
+        matching2 = main_computer.compute_matching(parameters, matching)
+
+        print("\n".join(map(str, matching2.links)))
 
 
 if __name__ == '__main__':
