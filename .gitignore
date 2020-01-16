@@ -1,9 +1,7 @@
 *.pyc
 __pycache__/
-*.iml
 
-*.xml
-
+.idea/
 Pipfile
 
 Pipfile.lock

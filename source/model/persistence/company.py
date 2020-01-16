@@ -5,11 +5,18 @@ from sqlalchemy.orm import relationship
 
 from base import Base
 
-companies_mainDomains_association = Table(
+companies_main_domains_association = Table(
     'companies_mainDomains', Base.metadata,
-    Column('companie_id', Integer, ForeignKey('companies.id')),
-    Column('mainDomain_id', Integer, ForeignKey('mainDomains.id'))
+    Column('company_id', Integer, ForeignKey('companies.id')),
+    Column('main_domain_id', Integer, ForeignKey('main_domains.id'))
 )
+
+companies_offers_locations_association = Table(
+    'companies _offers_locations', Base.metadata,
+    Column('company_id', Integer, ForeignKey('companies.id')),
+    Column('offers_locations_id', Integer, ForeignKey('offers_locations.id'))
+)
+
 
 class Company(Base):
     __tablename__ = 'companies'
@@ -17,25 +24,26 @@ class Company(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     size = Column(String)
-    presenceDay = Column(CHAR)
-    wantedDegrees = Column(Integer)
-    co_opStudent = Column(Boolean)
+    presence_day = Column(CHAR)
+    wanted_degrees = Column(Integer)
+    co_op_student = Column(Boolean)
     cdi = Column(Boolean)
-    nationalityDisc = Column(Boolean)
-    offerLength = Column(Integer)
-    pfePeriod = Column(Integer)
-    criteriaOrdering = Column(Integer)
-    mainDomains = relationship("MainDomain", secondary=companies_mainDomains_association)
+    nationality_disc = Column(Boolean)
+    offer_length = Column(Integer)
+    pfe_period = Column(Integer)
+    criteria_ordering = Column(Integer)
+    main_domains = relationship("main_domain", secondary=companies_main_domains_association)
+    offers_locations = relationship("offers_locations", secondary=companies_offers_locations_association)
 
-    def __init__(self, name, size, presenceDay, wantedDegrees, co_opStudent,
-                 cdi, nationalityDisc, offerLength, pfePeriod, criteriaOrdering):
+    def __init__(self, name, size, presence_day, wanted_degrees, co_op_student,
+                 cdi, nationality_disc, offer_length, pfe_period, criteria_ordering):
         self.name = name
         self.size = size
-        self.presenceDay = presenceDay
-        self.wantedDegrees = wantedDegrees
-        self.co_opStudent = co_opStudent
+        self.presence_day = presence_day
+        self.wanted_degrees = wanted_degrees
+        self.co_op_student = co_op_student
         self.cdi = cdi
-        self.nationalityDisc = nationalityDisc
-        self.offerLength = offerLength
-        self.pfePeriod = pfePeriod
-        self.criteriaOrdering = criteriaOrdering
+        self.nationality_disc = nationality_disc
+        self.offer_length = offer_length
+        self.pfe_period = pfe_period
+        self.criteria_ordering = criteria_ordering

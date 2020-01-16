@@ -5,8 +5,8 @@ from sqlalchemy import Column, String, Integer
 from base import Base
 
 
-class mainDomain(Base):
-    __tablename__ = 'mainDomains'
+class sub_domain(Base):
+    __tablename__ = 'main_domains'
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
