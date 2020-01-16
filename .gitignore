@@ -1,2 +1,9 @@
 *.pyc
 __pycache__/
+*.iml
+
+*.xml
+
+Pipfile
+
+Pipfile.lock
