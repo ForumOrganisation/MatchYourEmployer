@@ -17,7 +17,7 @@ class MainDomain(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
-    sub_domains = relationship("MainDomain", secondary=main_domains_sub_domains_association)
+    sub_domains = relationship("SubDomain", secondary=main_domains_sub_domains_association)
 
     def __init__(self, name):
         self.name = name

@@ -30,13 +30,11 @@ class Company(Base):
     cdi = Column(Boolean)
     nationality_disc = Column(Boolean)
     offer_length = Column(Integer)
-    pfe_period = Column(Integer)
-    criteria_ordering = Column(Integer)
     main_domains = relationship("MainDomain", secondary=companies_main_domains_association)
     offers_locations = relationship("OffersLocation", secondary=companies_offers_locations_association)
 
     def __init__(self, name, size, presence_day, wanted_degrees, co_op_student,
-                 cdi, nationality_disc, offer_length, pfe_period, criteria_ordering):
+                 cdi, nationality_disc, offer_length):
         self.name = name
         self.size = size
         self.presence_day = presence_day
@@ -45,5 +43,3 @@ class Company(Base):
         self.cdi = cdi
         self.nationality_disc = nationality_disc
         self.offer_length = offer_length
-        self.pfe_period = pfe_period
-        self.criteria_ordering = criteria_ordering
