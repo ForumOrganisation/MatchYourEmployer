@@ -3,6 +3,7 @@
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from sub_domain import SubDomain
+from base import Session
 
 from base import Base
 
@@ -22,3 +23,11 @@ class MainDomain(Base):
 
     def __init__(self, name):
         self.name = name
+
+    
+def findDomain(domainName):
+    session = Session()
+    domain = session.query(MainDomain).filter(MainDomain.name == domainName)
+    session.close()
+    return domain
+        

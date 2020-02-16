@@ -9,11 +9,7 @@ class OffersLocation(Base):
     __tablename__ = 'offers_locations'
 
     id = Column(Integer, primary_key=True)
-    city = Column(String)
-    country = Column(String)
-    in_out = Column(Boolean)
+    code = Column(String)
 
-    def __init__(self, city, country, in_out):
-        self.city = city
-        self.country = country
-        self.in_out = in_out
+    def __init__(self, code):
+       self.code = code

@@ -16,19 +16,39 @@ Base.metadata.create_all(engine)
 session = Session()
 
 # 4 - create companies
-wavestone = Company('Wavestone', 'ETI', 'W', 45, True, True, False, '56')
+wavestone = Company('Wavestone', 'ETI', 'W', 45, True, True, False, int('110000', 2))
 
 # 5 - creates students
-kenza = Student('Kenza', 'BOUZID', 'kenza.bouzid@insa-lyon.fr', 'INSA Lyon', '4', 'Stage', 'ETI', 'Marocaine')
+kenza = Student('Kenza', 'BOUZID', 'kenza.bouzid@insa-lyon.fr', 'INSA Lyon', int('001000', 2), 'Stage', 'ETI', 'Marocaine')
 
 # 6 - creates main and sub domains
-conseil = MainDomain('Etude et Conseil')
-sousDomain = SubDomain('Conseil en nouvelles technologies')
+main_domains = [
+    'Etude et Conseil',
+    'Informatique',
+    'Mecanique',
+    'Telecoms et reseaux',
+    'Electricite',
+    'Electronique',
+    'Agro-alimentaire',
+    'Environnement',
+    'Energetique',
+    'Materieaux',
+    'Genie des procedes',
+    'Genie civil',
+    'Amenagement',
+    'Industrie'
+]
 
-# 7 - add main domains to companies and students
-conseil.sub_domains = [sousDomain]
-wavestone.main_domains = [conseil]
-kenza.main_domain = [conseil]
+for domain in main_domains:
+    session.add(MainDomain(domain))
+
+
+# 7 - create geographical data
+
+geographical_codes = ['PA', 'RA', 'FR', 'IT']
+
+for code in geographical_codes:
+    session.add(OffersLocation(code))
 
 # 9 - persists data
 session.add(wavestone)
