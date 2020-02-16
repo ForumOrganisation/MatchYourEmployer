@@ -1,6 +1,6 @@
 # coding=utf-8
 
-from sqlalchemy import Column, String, Integer, Boolean, CHAR, ForeignKey, Table
+from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
 from base import Base
@@ -32,8 +32,8 @@ class Student(Base):
     contract_type = Column(String)
     company_size = Column(String)
     nationality = Column(String)
-    geo_mobility = relationship("main_domain", secondary=students_offers_locations_association)
-    sub_domains = relationship("main_domain", secondary=students_sub_domains_association)
+    geo_mobility = relationship("OffersLocation", secondary=students_offers_locations_association)
+    sub_domains = relationship("SubDomain", secondary=students_sub_domains_association)
 
     def __init__(self, first_name, last_name, email, offer_length, contract_type,
                  company_size, nationality):

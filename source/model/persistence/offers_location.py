@@ -5,7 +5,7 @@ from sqlalchemy import Column, String, Integer, Boolean
 from base import Base
 
 
-class offers_location(Base):
+class OffersLocation(Base):
     __tablename__ = 'offers_locations'
 
     id = Column(Integer, primary_key=True)

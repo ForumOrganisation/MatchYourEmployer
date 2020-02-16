@@ -32,8 +32,8 @@ class Company(Base):
     offer_length = Column(Integer)
     pfe_period = Column(Integer)
     criteria_ordering = Column(Integer)
-    main_domains = relationship("main_domain", secondary=companies_main_domains_association)
-    offers_locations = relationship("offers_locations", secondary=companies_offers_locations_association)
+    main_domains = relationship("MainDomain", secondary=companies_main_domains_association)
+    offers_locations = relationship("OffersLocation", secondary=companies_offers_locations_association)
 
     def __init__(self, name, size, presence_day, wanted_degrees, co_op_student,
                  cdi, nationality_disc, offer_length, pfe_period, criteria_ordering):

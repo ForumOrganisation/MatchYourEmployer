@@ -12,7 +12,7 @@ main_domains_sub_domains_association = Table(
 )
 
 
-class main_domain(Base):
+class MainDomain(Base):
     __tablename__ = 'main_domains'
 
     id = Column(Integer, primary_key=True)
