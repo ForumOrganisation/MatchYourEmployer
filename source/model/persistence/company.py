@@ -27,7 +27,7 @@ class Company(Base):
     name = Column(String)
     size = Column(String)
     presence_day = Column(CHAR) # WTB
-    wanted_degrees = Column(Integer) # 12345
+    wanted_degrees = Column(String) # 12345
     co_op_student = Column(Boolean)
     cdi = Column(Boolean)
     nationality_disc = Column(Boolean)

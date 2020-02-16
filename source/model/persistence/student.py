@@ -26,9 +26,9 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     first_name = Column(String)
     last_name = Column(String)
+    study_year = Column(Integer)
     email = Column(String)
     school = Column(String)
-    email = Column(String)
     offer_length = Column(Integer)
     contract_type = Column(String)
     company_size = Column(String)
@@ -36,10 +36,11 @@ class Student(Base):
     geo_mobility = relationship("OffersLocation", secondary=students_offers_locations_association)
     main_domains = relationship("MainDomain", secondary=students_main_domains_association)
 
-    def __init__(self, first_name, last_name, email, school, offer_length, contract_type,
+    def __init__(self, first_name, last_name, study_year, email, school, offer_length, contract_type,
                  company_size, nationality):
         self.first_name = first_name
         self.last_name = last_name
+        self.study_year = study_year
         self.email = email
         self.school = school
         self.offer_length = offer_length
