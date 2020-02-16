@@ -2,6 +2,8 @@
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
+from main_domain import MainDomain
+from offers_location import OffersLocation
 
 from base import Base
 

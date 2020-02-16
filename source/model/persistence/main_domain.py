@@ -2,6 +2,7 @@
 
 from sqlalchemy import Column, String, Integer, ForeignKey, Table
 from sqlalchemy.orm import relationship
+from sub_domain import SubDomain
 
 from base import Base
 
