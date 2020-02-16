@@ -16,10 +16,10 @@ Base.metadata.create_all(engine)
 session = Session()
 
 # 4 - create companies
-wavestone = Company('Wavestone', 'ETI', 'W', 45, True, True, False, int('110000', 2))
+wavestone = Company('Wavestone', 'ETI', 'W', 45, True, True, False, '56')
 
 # 5 - creates students
-kenza = Student('Kenza', 'BOUZID', 'kenza.bouzid@insa-lyon.fr', 'INSA Lyon', int('001000', 2), 'Stage', 'ETI', 'Marocaine')
+kenza = Student('Kenza', 'BOUZID', 'kenza.bouzid@insa-lyon.fr', 'INSA Lyon', '4', 'Stage', 'ETI', 'Marocaine')
 
 # 6 - creates main and sub domains
 conseil = MainDomain('Etude et Conseil')

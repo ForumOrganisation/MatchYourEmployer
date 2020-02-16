@@ -26,12 +26,12 @@ class Company(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     size = Column(String)
-    presence_day = Column(CHAR)
-    wanted_degrees = Column(Integer)
+    presence_day = Column(CHAR) # WTB
+    wanted_degrees = Column(Integer) # 12345
     co_op_student = Column(Boolean)
     cdi = Column(Boolean)
     nationality_disc = Column(Boolean)
-    offer_length = Column(Integer)
+    offer_length = Column(String) # 123456
     main_domains = relationship("MainDomain", secondary=companies_main_domains_association)
     offers_locations = relationship("OffersLocation", secondary=companies_offers_locations_association)
 
