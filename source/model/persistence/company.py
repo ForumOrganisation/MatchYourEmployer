@@ -25,6 +25,7 @@ class Company(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String)
+    email = Column(String)
     size = Column(String)
     presence_day = Column(CHAR) # WTB
     wanted_degrees = Column(String) # 12345

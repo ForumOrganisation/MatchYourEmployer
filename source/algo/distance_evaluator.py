@@ -1,6 +1,5 @@
 import numpy.random as rd
 
-
 class DistanceEvaluator:
     def __init__(self):
         # TODO create constructor
